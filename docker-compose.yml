@@ -9,5 +9,5 @@ services:
     ports:
       - 3000:80
     volumes:
-      - ./app:/app
-
+      - ./src:/src
+    working_dir: /src
