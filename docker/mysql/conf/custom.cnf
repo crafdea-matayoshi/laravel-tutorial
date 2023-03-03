@@ -1,0 +1,16 @@
+[mysqld]
+skip-host-cache
+skip-name-resolve
+
+# timezone
+default-time-zone = Asia/Tokyo
+
+# character
+character_set_server=utf8mb4
+
+# collation
+collation-server=utf8mb4_bin
+
+[mysql]
+# character
+default-character-set=utf8mb4
