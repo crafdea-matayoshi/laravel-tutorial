@@ -1,7 +1,5 @@
 FROM php:8.1.16-apache
 
-WORKDIR .
-
 ## パッケージインストール
 RUN set -eux; \
         apt-get update; \
@@ -26,8 +24,9 @@ RUN mv "$PHP_INI_DIR/php.ini-development" "$PHP_INI_DIR/php.ini"
 ENV APACHE_DOCUMENT_ROOT /src/public
 
 RUN sed -ri -e 's!/var/www/html!${APACHE_DOCUMENT_ROOT}!g' /etc/apache2/sites-available/*.conf
-RUN sed -ri -e 's!/var/www/!${APACHE_DOCUMENT_ROOT}!g' /etc/apache2/apache2.conf /etc/apache2/conf-available/*.conf
-RUN sed -i -e '/<Directory ${APACHE_DOCUMENT_ROOT}>/,/<\/Directory>/s/None/All/' /etc/apache2/apache2.conf
-RUN ln -s /etc/apache2/mods-available/rewrite.load /etc/apache2/mods-enabled/rewrite.load
 
-WORKDIR /src
+RUN sed -ri -e 's!/var/www/!${APACHE_DOCUMENT_ROOT}!g' /etc/apache2/apache2.conf /etc/apache2/conf-available/*.conf
+
+RUN sed -i -e '/<Directory ${APACHE_DOCUMENT_ROOT}>/,/<\/Directory>/s/None/All/' /etc/apache2/apache2.conf
+
+RUN ln -s /etc/apache2/mods-available/rewrite.load /etc/apache2/mods-enabled/rewrite.load

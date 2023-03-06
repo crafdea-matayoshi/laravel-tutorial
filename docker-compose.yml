@@ -5,7 +5,6 @@ services:
     build: 
       context: .
       dockerfile: ./docker/apache/Dockerfile
-    container_name: apache
     ports:
       - 3000:80
     volumes:
@@ -18,7 +17,6 @@ services:
     build:
       context: .
       dockerfile: ./docker/mysql/Dockerfile
-    container_name: mysql
     ports:
       - 4306:3306
     environment:
