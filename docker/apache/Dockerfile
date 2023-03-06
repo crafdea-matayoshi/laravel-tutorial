@@ -12,6 +12,10 @@ RUN set -eux; \
         rm -rf /var/lib/apt/lists/* && \
         docker-php-ext-install pdo_mysql
 
+RUN curl -sL https://deb.nodesource.com/setup_18.x |bash - && \
+    apt-get install -y nodejs
+
+
 COPY --from=composer /usr/bin/composer /usr/bin/composer
 
 # Use the default production configuration /usr/local/etc/php
